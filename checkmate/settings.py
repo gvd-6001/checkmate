@@ -94,7 +94,7 @@ WSGI_APPLICATION = 'checkmate.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'checkMateNew',
+        'NAME': 'checkMatenew',
         'USER': 'postgres',
         'PASSWORD': 'geniusvision6001',
         'HOST': 'checkmate.cy9ibdoshf4y.ap-south-1.rds.amazonaws.com',
