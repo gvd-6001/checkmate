@@ -144,7 +144,7 @@ STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Celery Settings
-CELERY_BROKER_URL = 'redis://:Gvd@6001@srv-captain--check-mate-ads-redis:6379'
+CELERY_BROKER_URL = 'redis://:Gvd@6001@srv-captain--checkmate-redis:6379'
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TASK_SERIALIZER = 'json'
