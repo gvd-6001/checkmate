@@ -1,0 +1,64 @@
+{% load static %}
+{% include "common/base.html" %}
+{% block link %}
+    <link href="{% static 'plugins/highlight/styles/github-gist.css' %}" rel="stylesheet">
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css' rel='stylesheet'/>
+{% endblock %}
+{% block content %}
+    <div class="app align-content-stretch d-flex flex-wrap">
+        {% include "common/sidebar.html" %}
+        <div class="app-container">
+            {% include "common/header.html" %}
+            <!--Content -->
+            <div class="app-content">
+                <div class="content-wrapper">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <div class="page-description">
+                                    <h1>Device Location </h1>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div id='map' style='width: 100%; height: 70vh;' class="card"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript's -->
+    <script src="{% static 'plugins/jquery/jquery-3.5.1.min.js' %}"></script>
+    <script src="{% static 'plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'plugins/perfectscroll/perfect-scrollbar.min.js' %}"></script>
+    <script src="{% static 'plugins/pace/pace.min.js' %}"></script>
+    <script src="{% static 'js/main.min.js' %}"></script>
+    <script src="{% static 'js/custom.js' %}"></script>
+    <script src="{% static 'plugins/bootstrap/js/popper.min.js' %}"></script>
+    <script src="{% static 'plugins/highlight/highlight.pack.js' %}"></script>
+    <!--Map of Branch-->
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.js'></script>
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1IjoiaGVyYW1ibSIsImEiOiJja3lsZjNwcnUyb240MnVxaGZ2Y2w1Y2lpIn0.CEsnNMuTnZJsBb0WaZIz4w';
+        let map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/herambm/ckylha7inarjn15pcnih3hz4j',
+            center: [{{ singleBranch.longitude }}, {{ singleBranch.latitude }}],
+            zoom: 6
+        });
+        {% for loc in branch_data %}
+            let markers{{ loc.branchCode }} = new mapboxgl.Marker()
+                .setLngLat([{{ loc.longitude }}, {{ loc.latitude }}])
+                .setPopup(new mapboxgl.Popup()
+                    .setHTML('<h6><br/>Branch Name: {{ loc.branchName }}<br/><h6><br/>Address : {{ loc.branchAddress1 }} {{ loc.branchAddress2 }} {{ loc.cityName }} {{ loc.stateName }} </h6><br/><a href="{% url 'branchInfo' loc.id %}" target="_blank"><button class="btn btn-success">View Branch</button></a>'))
+                .addTo(map);
+        {% endfor %}
+        map.addControl(new mapboxgl.NavigationControl());
+    </script>
+
+
+{% endblock %}

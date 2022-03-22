@@ -1,0 +1,126 @@
+{% load static %} {% include "common/base.html" %} {% block link %}
+<link
+  href="{% static 'plugins/highlight/styles/github-gist.css' %}"
+  rel="stylesheet"
+/>
+<link
+  href="{% static 'plugins/datatables/datatables.min.css' %}"
+  rel="stylesheet"
+/>
+{% endblock %} {% block content %}
+<div class="app align-content-stretch d-flex flex-wrap">
+  {% include "common/sidebar.html" %}
+  <div class="app-container">
+    {% include "common/header.html" %}
+    <!--Content -->
+    <div class="app-content">
+      <div class="content-wrapper">
+        <div class="row">
+          <div class="col">
+            <div class="page-description">
+              <h1>Employee</h1>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-2">
+            <div class="text-right">
+              <a href="{% url 'employeeAdd' %}">
+                <button type="button" class="btn btn-success m-b-sm">
+                  + Add Employee
+                </button>
+              </a>
+            </div>
+          </div>
+        </div>
+        <!-- Data Show -->
+        <div class="row">
+          <div class="col">
+            <div class="card">
+              <div class="card-body">
+                <table id="datatable1" class="display" style="width: 100%">
+                  <thead>
+                    <tr>
+                      <th>Username</th>
+                      <th>Email</th>
+                      <th>Name</th>
+                      <th>Is Active</th>
+                      <th>Is Admin</th>
+                      <th>Role</th>
+                      <th>Date Joined</th>
+                      <th>Last Login</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for pf in profile %}
+                    <tr>
+                      <td>
+                        <a
+                          href="{% url 'employeeUpdate' pf.name %} "
+                          style="color: #0aaeb3; text-decoration: none"
+                        >
+                          {{ pf.user.username }}
+                        </a>
+                      </td>
+
+                      <td>{{ pf.email }}</td>
+                      <td>{{ pf.name }}</td>
+                      <td>{{ pf.user.is_active }}</td>
+                      <td>{{ pf.user.is_superuser }}</td>
+                      <td>
+                        {% for ugp in pf.user.groups.values %}
+                        <button
+                          type="button"
+                          class="btn btn-outline-success btn-rounded m-lg-1"
+                        >
+                          {{ ugp.name }}
+                        </button>
+                        {% endfor %}
+                      </td>
+                      <td>{{ pf.user.date_joined }}</td>
+                      <td>{{ pf.user.last_login }}</td>
+                      <td>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <a href="{% url 'profileDetails' pf.id %}">
+                              <button type="button" class="btn btn-warning">
+                                Profile
+                              </button>
+                            </a>
+                          </div>
+                          <div class="col-md-4" style="margin-left: 10px">
+                            <a href="{% url 'employeeDelete' pf.id %}">
+                              <button type="button" class="btn btn-danger">
+                                Delete
+                              </button>
+                            </a>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- JavaScript's -->
+<script src="{% static 'plugins/jquery/jquery-3.5.1.min.js' %}"></script>
+<script src="{% static 'plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'plugins/perfectscroll/perfect-scrollbar.min.js' %}"></script>
+<script src="{% static 'plugins/pace/pace.min.js' %}"></script>
+<script src="{% static 'js/main.min.js' %}"></script>
+<script src="{% static 'js/custom.js' %}"></script>
+<script src="{% static 'plugins/bootstrap/js/popper.min.js' %}"></script>
+<script src="{% static 'plugins/highlight/highlight.pack.js' %}"></script>
+<script src="{% static 'plugins/datatables/datatables.min.js' %}"></script>
+<script src="{% static 'js/pages/datatables.js' %}"></script>
+
+{% endblock %}

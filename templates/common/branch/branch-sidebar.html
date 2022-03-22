@@ -1,0 +1,57 @@
+{% block content %}
+    <div class="content-menu content-menu-right">
+        <ul class="list-unstyled">
+            {% if 'branchView' in request.path %}
+                <li><a href="{% url 'branchInfo' branch_all_info.id %}" class="active">Branch Info</a></li>
+            {% else %}
+                <li><a href="{% url 'branchInfo' branch_all_info.id %}">Branch Info</a></li>
+            {% endif %}
+            {#            {% if 'status' in request.path %}#}
+            {#                <li><a href="{% url 'branchStatus' branch_all_info.id %}" class="active">Status</a></li>#}
+            {#            {% else %}#}
+            {#                <li><a href="{% url 'branchStatus' branch_all_info.id %}">Status</a></li>#}
+            {#            {% endif %}#}
+            <li class="divider"></li>
+{#            <!-- Panel Info -->#}
+{#            {% if 'panel-info' in request.path %}#}
+{#                <li><a class="active">Panel Info</a></li>#}
+{#                {% for panel in panelInfo %}#}
+{#                    <li><a href="#">{{ panel.manufacturer }}</a></li>#}
+{#                {% endfor %}#}
+{#            {% else %}#}
+{#                <li><a>Panel Info</a></li>#}
+{#                {% for panel in panelInfo %}#}
+{#                    <li><a href="#">{{ panel.manufacturer }}</a></li>#}
+{#                {% endfor %}#}
+{#            {% endif %}#}
+{#            <li class="divider"></li>#}
+            {% if 'vighanharta' in request.path %}
+                <li><a href="{% url 'vighanharta' branch_all_info.id %}" class="active">Vighanharta</a></li>
+            {% else %}
+                <li><a href="{% url 'vighanharta' branch_all_info.id %}">Vighanharta</a></li>
+            {% endif %}
+
+            <li class="divider"></li>
+
+            <!-- Hikvision NVR and CCTV Info -->
+            {% if 'hikDetail' in request.path %}
+                <li><a href="{% url 'hikStatus' branch_all_info.id %}" class="active">Hikvision</a></li>
+            {% else %}
+                <li><a href="{% url 'hikStatus' branch_all_info.id %}">Hikvision</a></li>
+            {% endif %}
+
+
+            <li class="divider"></li>
+            <!-- Octo-cam NVR and CCTV Info -->
+{#            {% if 'octDetail' in request.path %}#}
+{#                <li><a href="{% url 'hikStatus' branch_all_info.id %}" class="active">Octocam</a></li>#}
+{#            {% else %}#}
+{#                <li><a href="{% url 'hikStatus' branch_all_info.id %}">Octocam</a></li>#}
+{#            {% endif %}#}
+{##}
+{#            <li class="divider"></li>#}
+
+
+        </ul>
+    </div>
+{% endblock %}

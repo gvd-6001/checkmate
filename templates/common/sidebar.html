@@ -1,0 +1,123 @@
+{% load static %} {% block content %}
+    <div class="app-sidebar">
+        <div class="logo">
+            <a href="{% url 'dashboard' %}" class="logo-icon">
+                <span class="logo-text">NeuBit</span>
+            </a>
+            <div class="sidebar-user-switcher user-activity-online">
+                <a href="{% url 'profileDetails' request.user.profile.id %}">
+                    <span class="activity-indicator"></span>
+                    <span class="user-info-text"> {{ request.user }}<br/> </span>
+                </a>
+            </div>
+        </div>
+        <div class="app-menu">
+            <ul class="accordion-menu">
+                <li class="sidebar-title">Menu</li>
+                <li class="{% if request.path == "/dashboard/" %} active-page {% endif %}">
+                    <a href="{% url 'dashboard' %}" class="active">
+                        <i class="material-icons">dashboard</i>
+                        Dashboard
+                    </a>
+                </li>
+                <!-- Staff Menus -->
+                <li class="{% if 'staff' in request.path %} active-page
+                            {% endif %}">
+                    <a class="active" href="">
+                        <i class="material-icons">account_circle</i>Staff
+                        <i class="material-icons has-sub-menu">keyboard_arrow_right</i>
+                    </a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a href="{% url 'roles' %}">Roles</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'employee' %}">Employees</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- Geography Menus -->
+                <li class="{% if 'geo' in request.path %} active-page
+                            {% endif %}">
+                    <a href="">
+                        <i class="material-icons">share_location</i>Geography
+                        <i class="material-icons has-sub-menu">keyboard_arrow_right</i>
+                    </a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a href="{% url 'branchList' %}">Branch</a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- Infrastructure Menus -->
+                <li class="{% if 'infra' in request.path %} active-page
+                           {% endif %}">
+                    <a href="">
+                        <i class="material-icons">business</i>Infrastructure
+                        <i class="material-icons has-sub-menu">keyboard_arrow_right</i>
+                    </a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a href="{% url 'deviceLoc' %}">Device Location</a>
+                        </li>
+                        <li>
+                            <a href="#">Device Info<i class="material-icons has-sub-menu">keyboard_arrow_right</i></a>
+                            <ul class="sub-menu">
+                                <li>
+                                    <a href="{% url 'devicePanelInfo' %}"> Panel</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'deviceNvrInfo' %}"> NVR </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+
+
+                <!-- Surveillance Menu -->
+                <li class="{% if 'surv' in request.path %} active-page {% endif %}">
+                    <a href="">
+                        <i class="material-icons">mode_standby</i>Surveillance
+                        <i class="material-icons has-sub-menu">keyboard_arrow_right</i>
+                    </a>
+                    <ul class="sub-menu">
+
+                        <li>
+                            <a href="#">NVR Alerts<i class="material-icons has-sub-menu">keyboard_arrow_right</i></a>
+                            <ul class="sub-menu">
+                                <li>
+                                    <a href="{% url 'hikNvrAlerts' %}">Hikvision</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">Panel Alerts<i class="material-icons has-sub-menu">keyboard_arrow_right</i></a>
+                            <ul class="sub-menu">
+                                <li>
+                                    <a href="#">Vighnahrata</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- Settings Menu -->
+                <li class="{% if "setup" in request.path %} active-page
+                           {% endif %}">
+                    <a href="" class="active">
+                        <i class="material-icons">settings</i>Settings
+                        <i class="material-icons has-sub-menu">keyboard_arrow_right</i>
+                    </a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a href="{% url 'branch' %}">Branch Config</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+{% endblock %}

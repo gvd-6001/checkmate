@@ -1,0 +1,108 @@
+{% load static %} {% include "common/base.html" %} {% block content %}
+<div class="app align-content-stretch d-flex flex-wrap">
+  {% include "common/sidebar.html" %}
+  <div class="app-container">
+    {% include "common/header.html" %}
+    <!--Content -->
+    <div class="app-content" id="parentDiv">
+      <div class="content-wrapper">
+        <div class="row">
+          <div class="col">
+            <div class="page-description">
+              <h1>Dashboard</h1>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xl-4">
+            <div class="card widget widget-stats">
+              <div class="card-body">
+                <div class="widget-stats-container d-flex">
+                  <div class="widget-stats-icon widget-stats-icon-primary">
+                    <i class="material-icons-outlined">business</i>
+                  </div>
+                  <div class="widget-stats-content flex-fill">
+                    <span class="widget-stats-title">Total Branch</span>
+                    <span class="widget-stats-amount">{{ branchCount }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xl-4">
+            <div class="card widget widget-stats">
+              <div class="card-body">
+                <div class="widget-stats-container d-flex">
+                  <div class="widget-stats-icon widget-stats-icon-primary">
+                    <i class="material-icons-outlined">dns</i>
+                  </div>
+                  <div class="widget-stats-content flex-fill">
+                    <span class="widget-stats-title">Panel</span>
+                    <span class="widget-stats-amount">{{ panelCount }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-4">
+            <div class="card widget widget-stats">
+              <div class="card-body">
+                <div class="widget-stats-container d-flex">
+                  <div class="widget-stats-icon widget-stats-icon-warning">
+                    <i class="material-icons-outlined">storage</i>
+                  </div>
+                  <div class="widget-stats-content flex-fill">
+                    <span class="widget-stats-title">NVR</span>
+                    <span class="widget-stats-amount">{{ nvrCount }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xl-4">
+            <div class="card widget widget-list">
+              <div class="card-header">
+                <h5 class="card-title">Active User</h5>
+              </div>
+              <div class="card-body">
+                <ul class="widget-list-content list-unstyled">
+                  {% for user in userProfile %}
+                  <li class="widget-list-item widget-list-item-green">
+                    <span class="widget-list-item-icon"
+                      ><i class="material-icons-outlined"
+                        >account_circle</i
+                      ></span
+                    >
+                    <span class="widget-list-item-description">
+                      <a href="#" class="widget-list-item-description-title">
+                        {{ user.name }}
+                      </a>
+                      <span class="widget-list-item-description-subtitle">
+                        {{ user.user.email }}
+                      </span>
+                    </span>
+                  </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Javascripts -->
+<script src="{% static 'plugins/jquery/jquery-3.5.1.min.js' %}"></script>
+<script src="{% static 'plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'plugins/perfectscroll/perfect-scrollbar.min.js' %}"></script>
+<script src="{% static 'plugins/pace/pace.min.js' %}"></script>
+<script src="{% static 'plugins/apexcharts/apexcharts.min.js' %}"></script>
+<script src="{% static 'js/main.min.js' %}"></script>
+<script src="{% static 'js/custom.js' %}"></script>
+<script src="{% static 'js/pages/dashboard.js' %}"></script>
+{% endblock %}

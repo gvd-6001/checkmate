@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Neubit All in One Business Solution" />
+    <meta name="keywords" content="Neu-bit,dashboard, cctv, rtsp, inventory, user" />
+    <meta name="author" content="GVD" />
+    <!-- The above 6 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <!-- Title -->
+    <title>NeuBit - Listen Your Data</title>
+
+    <!-- Styles -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
+        rel="stylesheet" />
+    <link href="{% static 'plugins/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" />
+    <link href="//cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
+    <link href="{% static 'plugins/perfectscroll/perfect-scrollbar.css' %}" rel="stylesheet" />
+    <link href="{% static 'plugins/pace/pace.css' %}" rel="stylesheet" />
+    {% block link %}
+
+    {% endblock %}
+
+    <!-- Theme Styles -->
+    <link href="{% static 'css/main.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/darktheme.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/custom.css' %}" rel="stylesheet" />
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/logoN.png' %}" />
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/logoN.png' %}" />
+</head>
+
+<body>
+    {% block content %}{% endblock %}
+    <script src="https://unpkg.com/htmx.org@1.7.0"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+    <script>
+        {% if messages %}
+        {% for msg in messages %}
+        Swal.fire({
+            position: 'top-end',
+            title: '{{ msg }}',
+            icon: '{{ msg.tags }}',
+            timer: '2000',
+            timerProgressBar: true,
+            showConfirmButton: false
+        })
+        {% endfor %}
+        {% endif %}
+    </script>
+
+    <script>
+
+        document.addEventListener('contextmenu', function (e) {
+            e.preventDefault();
+        });
+        document.addEventListener('keydown', function (e) {
+            if (event.keyCode === 123) {
+                return false;
+            }
+            if (e.ctrlKey && e.shiftKey) {
+                return false;
+            }
+            if (event.ctrlKey && event.keyCode === 85) {
+                return false;
+            }
+        });
+    /* other script code */
+    </script>
+</body>
+
+</html>

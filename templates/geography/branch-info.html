@@ -1,0 +1,166 @@
+{% load static %} {% include "common/base.html" %}
+{% block link %}
+    <link href="{% static 'plugins/highlight/styles/github-gist.css' %}" rel="stylesheet">
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css' rel='stylesheet'/>
+{% endblock %}
+{% block content %}
+    <div class="app align-content-stretch d-flex flex-wrap">
+        {% include "common/sidebar.html" %}
+        <div class="app-container">
+            {% include "common/header.html" %}
+            <!--Content -->
+            <div class="app-content">
+                <a href="#" class="content-menu-toggle btn btn-primary"><i class="material-icons">menu</i>
+                    content</a>
+                {% include 'common/branch/branch-sidebar.html' %}
+                <div class="content-wrapper">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col">
+                                <div class="page-description">
+                                    <h1>{{ branch_all_info.branchName }}</h1>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <span>Branch Name :</span>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <span>{{ branch_all_info.branchName }}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <span>Address :</span>
+                                                    </div>
+                                                    <div class="col">
+                                                        <span>{{ branch_all_info.branchAddress1 }}-{{ branch_all_info.branchAddress2 }}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <span>Branch State :</span>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <span>{{ branch_all_info.stateName }}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <span>Branch City :</span>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <span>{{ branch_all_info.cityName }}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <span>Contact No. :</span>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <span>{{ branch_all_info.branchNumber }}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <span>Total Panels :</span>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <span>{{ panelInfo.count }}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <span>Total NVR :</span>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <span>{{ nvrInfo.count }}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <span>Branch Code:</span>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <span>{{ branch_all_info.branchCode }}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="card" id='map' style='width: 1060px; height: 450px;'>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- JavaScript's -->
+    <script src="{% static 'plugins/jquery/jquery-3.5.1.min.js' %}"></script>
+    <script src="{% static 'plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'plugins/perfectscroll/perfect-scrollbar.min.js' %}"></script>
+    <script src="{% static 'plugins/pace/pace.min.js' %}"></script>
+    <script src="{% static 'js/main.min.js' %}"></script>
+    <script src="{% static 'js/custom.js' %}"></script>
+    <script src="{% static 'plugins/bootstrap/js/popper.min.js' %}"></script>
+    <script src="{% static 'plugins/highlight/highlight.pack.js' %}"></script>
+    <!--Map of Branch-->
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.js'></script>
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1IjoiaGVyYW1ibSIsImEiOiJja3lsZjNwcnUyb240MnVxaGZ2Y2w1Y2lpIn0.CEsnNMuTnZJsBb0WaZIz4w';
+        let map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/herambm/ckylha7inarjn15pcnih3hz4j',
+            center: [{{ branch_all_info.longitude }},{{ branch_all_info.latitude }}],
+            zoom: 12
+        });
+        const marker1 = new mapboxgl.Marker()
+            .setLngLat([{{ branch_all_info.longitude }},{{ branch_all_info.latitude }}])
+            .setPopup(new mapboxgl.Popup().setHTML("<p><br/>NVR:2 <br/> CCTV:2</p>"))
+            .addTo(map);
+        map.addControl(new mapboxgl.NavigationControl());
+    </script>
+
+{% endblock %}
