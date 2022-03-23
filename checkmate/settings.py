@@ -26,7 +26,7 @@ SECRET_KEY = 'ds3*@zbum##feon1a&a&j&sn+7s6^^89bvmod$l67g)u!$_562'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['checkmate.neubit.in']
+ALLOWED_HOSTS = ['checkmate.in.neubit.in']
 
 
 # Application definition
