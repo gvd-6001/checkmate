@@ -6,7 +6,7 @@ from infrastructure.models import InfoNVR, PanelInfo
 
 
 @shared_task(bind=True)
-def hikHddStatus():
+def hikHddStatus(self):
     hikNvr = InfoNVR.objects.filter(nvr__selectManufacturer="Hikvision")
     for i in hikNvr:
         fetchData = Client('http://' + str(i.nvr.ipAddress) + ":" + str(i.nvr.port), i.nvr.username, i.nvr.password)
@@ -26,7 +26,7 @@ def hikHddStatus():
 
 
 @shared_task(bind=True)
-def vighZoneStatus():
+def vighZoneStatus(self):
     vighPanel = PanelInfo.objects.filter(
         panel__selectManufacturer="Vighanharta")
     for i in vighPanel:
