@@ -21,10 +21,9 @@ def hikHddStatus(self):
                 InfoNVR.objects.filter(id=i.id).update(hddCapacity=hddResponse['hddList']['hdd']['capacity'])
                 InfoNVR.objects.filter(id=i.id).update(freeHdd=hddResponse['hddList']['hdd']['freeSpace'])
                 InfoNVR.objects.filter(id=i.id).update(hddType=hddResponse['hddList']['hdd']['hddType'])
-            else:
-                InfoNVR.objects.filter(id=i.id).update(status=False)
         except:
             print("Connection not establish")
+            InfoNVR.objects.filter(id=i.id).update(status=False)
     return "Done"
 
 
