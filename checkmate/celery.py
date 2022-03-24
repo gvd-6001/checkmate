@@ -19,7 +19,7 @@ app.config_from_object('django.conf:settings', namespace='CELERY')
 app.conf.beat_schedule = {
     "hikHddStatus": {
         'task': 'infrastructure.tasks.hikHddStatus',
-        'schedule': crontab(minute="*/2")
+        'schedule': crontab(minute="*/5")
     },
     "vighZoneStatus": {
         'task': 'infrastructure.tasks.vighZoneStatus',
